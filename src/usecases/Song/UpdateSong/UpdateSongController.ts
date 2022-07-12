@@ -1,22 +1,27 @@
 import { Request, Response } from "express";
-import { CreateSongUseCase } from "./CreateSongUseCase";
+import { UpdateSongUseCase } from "./UpdateSongUseCase";
 
-export class CreateSongcontroller {
-  constructor(private createSongUseCase: CreateSongUseCase) {}
+export class UpdateSongController {
+  constructor(private updateSongUseCase: UpdateSongUseCase) {}
 
   async handle(request: Request, response: Response): Promise<Response> {
+    const { id }: { id: string } = Object(request["query"]);
+
     const { name, artist, gender, album }: { name: string; artist: string; gender: string; album: string } =
       request["body"];
 
     try {
-      const song = await this.createSongUseCase.execute({
+      const songId: number = parseInt(id);
+
+      const song = await this.updateSongUseCase.execute({
+        id: songId,
         name,
         artist,
         gender,
         album,
       });
 
-      return response.status(201).send({ success: true, song });
+      return response.status(200).send({ success: true, song });
     } catch (error) {
       return response.status(400).send({ success: false, message: error["message"] || "Unexpected error." });
     }

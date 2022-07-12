@@ -1,6 +1,7 @@
 import { Song } from "@prisma/client";
 import { prisma } from "../../services/prisma";
 import { ICreateSongDTO } from "../../usecases/Song/CreateSong/CreateSongDTO";
+import { IUpdateSongDTO } from "../../usecases/Song/UpdateSong/UpdateSongDTO";
 import { ISongRepository } from "../Song";
 
 export class PrismaSongRepository implements ISongRepository {
@@ -21,5 +22,21 @@ export class PrismaSongRepository implements ISongRepository {
     const songs = await prisma.song.findMany();
 
     return songs;
+  }
+
+  async update({ id, name, artist, gender, album }: IUpdateSongDTO) {
+    const song = await prisma.song.update({
+      where: {
+        id,
+      },
+      data: {
+        name,
+        artist,
+        gender,
+        album,
+      },
+    });
+
+    return song;
   }
 }
