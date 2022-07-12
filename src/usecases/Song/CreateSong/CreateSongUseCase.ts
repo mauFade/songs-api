@@ -1,3 +1,4 @@
+import { Song } from "./../../../entities/Song";
 import { ISongRepository } from "../../../repositories/Song";
 import { ICreateSongDTO } from "./CreateSongDTO";
 
@@ -17,13 +18,10 @@ export class CreateSongUseCase {
       throw new Error("Gender is required.");
     }
 
-    const song = await this.SongRepository.create({
-      name,
-      artist,
-      gender,
-      album,
-    });
+    const song = new Song({ name, artist, gender, album });
 
-    return song;
+    const data = await this.SongRepository.create(song);
+
+    return data;
   }
 }

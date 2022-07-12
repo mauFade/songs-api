@@ -9,7 +9,8 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "useUnknownInCatchVariables": false
+    "useUnknownInCatchVariables": false,
+    "strictPropertyInitialization": false
   },
   "include": ["src/**/*.ts"]
 }
