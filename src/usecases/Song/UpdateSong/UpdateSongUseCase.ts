@@ -5,7 +5,7 @@ export class UpdateSongUseCase {
   constructor(private songRepository: ISongRepository) {}
 
   async execute({ id, name, artist, gender, album }: IUpdateSongDTO) {
-    if (!id) {
+    if (!id || id === 0) {
       throw new Error("Song id is required.");
     }
 
