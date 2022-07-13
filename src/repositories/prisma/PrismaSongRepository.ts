@@ -1,7 +1,7 @@
-import { Song } from "@prisma/client";
 import { prisma } from "../../services/prisma";
 import { ICreateSongDTO } from "../../usecases/Song/CreateSong/CreateSongDTO";
 import { IUpdateSongDTO } from "../../usecases/Song/UpdateSong/UpdateSongDTO";
+import { IDeleteSongDTO } from "../../usecases/Song/DeleteSong/DeleteSongDTO";
 import { ISongRepository } from "../Song";
 
 export class PrismaSongRepository implements ISongRepository {
@@ -38,5 +38,13 @@ export class PrismaSongRepository implements ISongRepository {
     });
 
     return song;
+  }
+
+  async delete({ id }: IDeleteSongDTO) {
+    await prisma.song.delete({
+      where: {
+        id,
+      },
+    });
   }
 }
