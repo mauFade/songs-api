@@ -1,5 +1,8 @@
 import { Router } from "express";
+
 import { createAlbumController } from "./usecases/Album/CreateAlbum";
+import { readAlbumController } from "./usecases/Album/ListAlbums";
+import { updateAlbumController } from "./usecases/Album/UpdateAlbum";
 
 import { createSongController } from "./usecases/Song/CreateSong";
 import { deleteSongController } from "./usecases/Song/DeleteSong";
@@ -28,6 +31,14 @@ router.delete("/song", (request, response) => {
 // Rotas de albums
 router.post("/album", (request, response) => {
   return createAlbumController.handle(request, response);
+});
+
+router.get("/album", (request, response) => {
+  return readAlbumController.handle(request, response);
+});
+
+router.put("/album", (request, response) => {
+  return updateAlbumController.handle(request, response);
 });
 
 export { router };
