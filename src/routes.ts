@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import { createAlbumController } from "./usecases/Album/CreateAlbum";
+import { deleteAlbumController } from "./usecases/Album/DeleteAlbum";
 import { readAlbumController } from "./usecases/Album/ListAlbums";
 import { updateAlbumController } from "./usecases/Album/UpdateAlbum";
 
@@ -39,6 +40,10 @@ router.get("/album", (request, response) => {
 
 router.put("/album", (request, response) => {
   return updateAlbumController.handle(request, response);
+});
+
+router.delete("/album", (request, response) => {
+  return deleteAlbumController.handle(request, response);
 });
 
 export { router };
